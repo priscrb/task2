@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { fetchAddressByCEP } from '../../services/viacep'
 import { saveAddress } from '../../services/storage'
 import type { AddressData } from '../../types/address'
+import { useAddresses } from '../../context/AddressContext'
 
 const formSchema = z.object({
   username: z.string().min(3, 'Username must be at least 3 characters'),
@@ -19,6 +20,7 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>
 
 const AddressForm: FC = () => {
+  const { refreshAddresses } = useAddresses()
   const {
     register,
     handleSubmit,
@@ -41,6 +43,7 @@ const AddressForm: FC = () => {
       }
 
       saveAddress(newAddress)
+      refreshAddresses()
       toast.success('Address saved successfully!')
       reset()
     } catch (error) {

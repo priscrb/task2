@@ -1,14 +1,11 @@
-import { FC, useState, useEffect } from 'react'
-import {
-  getAddresses,
-  deleteAddress,
-  updateAddress
-} from '../../services/storage'
+import { FC, useState } from 'react'
+import { deleteAddress, updateAddress } from '../../services/storage'
 import { AddressData } from '../../types/address'
 import toast from 'react-hot-toast'
+import { useAddresses } from '../../context/AddressContext'
 
 const AddressList: FC = () => {
-  const [addresses, setAddresses] = useState<AddressData[]>([])
+  const { addresses, refreshAddresses } = useAddresses()
   const [filters, setFilters] = useState({
     username: '',
     city: '',
@@ -18,13 +15,9 @@ const AddressList: FC = () => {
   const [editingId, setEditingId] = useState<string | null>(null)
   const [editName, setEditName] = useState('')
 
-  useEffect(() => {
-    setAddresses(getAddresses())
-  }, [])
-
   const handleDelete = (id: string) => {
     deleteAddress(id)
-    setAddresses(getAddresses())
+    refreshAddresses()
     toast.success('Address deleted successfully!')
   }
 
@@ -35,7 +28,7 @@ const AddressList: FC = () => {
 
   const handleSaveEdit = (id: string) => {
     updateAddress(id, { addressName: editName })
-    setAddresses(getAddresses())
+    refreshAddresses()
     setEditingId(null)
     toast.success('Address name updated successfully!')
   }
