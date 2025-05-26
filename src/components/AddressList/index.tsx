@@ -107,7 +107,7 @@ const AddressList: FC = () => {
       />
 
       <div
-        className="mb-6 grid gap-4 rounded-lg bg-white p-4 shadow-sm sm:grid-cols-2 md:grid-cols-4"
+        className="mb-6 grid gap-4 rounded-lg bg-white p-4 shadow-sm sm:grid-cols-2 md:grid-cols-4 dark:bg-gray-800"
         role="search"
         aria-label="Address filters"
       >
@@ -122,7 +122,7 @@ const AddressList: FC = () => {
             type="text"
             id="username-filter"
             placeholder="Filter by username"
-            className="block w-full rounded-lg border-0 py-3 pl-11 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            className="block w-full rounded-lg border-0 py-3 pl-11 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-gray-700 dark:placeholder:text-gray-500 dark:focus:ring-indigo-500"
             value={filters.username}
             onChange={(e) =>
               setFilters({ ...filters, username: e.target.value })
@@ -142,7 +142,7 @@ const AddressList: FC = () => {
             type="text"
             id="city-filter"
             placeholder="Filter by city"
-            className="block w-full rounded-lg border-0 py-3 pl-11 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            className="block w-full rounded-lg border-0 py-3 pl-11 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-gray-700 dark:placeholder:text-gray-500 dark:focus:ring-indigo-500"
             value={filters.city}
             onChange={(e) => setFilters({ ...filters, city: e.target.value })}
             aria-label="Filter addresses by city"
@@ -160,7 +160,7 @@ const AddressList: FC = () => {
             type="text"
             id="state-filter"
             placeholder="Filter by state"
-            className="block w-full rounded-lg border-0 py-3 pl-11 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            className="block w-full rounded-lg border-0 py-3 pl-11 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-gray-700 dark:placeholder:text-gray-500 dark:focus:ring-indigo-500"
             value={filters.state}
             onChange={(e) => setFilters({ ...filters, state: e.target.value })}
             aria-label="Filter addresses by state"
@@ -178,7 +178,7 @@ const AddressList: FC = () => {
             type="text"
             id="address-name-filter"
             placeholder="Search by address name"
-            className="block w-full rounded-lg border-0 py-3 pl-11 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            className="block w-full rounded-lg border-0 py-3 pl-11 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-gray-700 dark:placeholder:text-gray-500 dark:focus:ring-indigo-500"
             value={filters.addressName}
             onChange={(e) =>
               setFilters({ ...filters, addressName: e.target.value })
@@ -188,17 +188,17 @@ const AddressList: FC = () => {
         </div>
       </div>
 
-      <div className="overflow-hidden rounded-lg bg-white shadow ring-1 ring-black ring-opacity-5">
+      <div className="overflow-hidden rounded-lg bg-white shadow ring-1 ring-black ring-opacity-5 dark:bg-gray-800 dark:ring-gray-700">
         <table
           className="min-w-full divide-y divide-gray-300"
           role="grid"
           aria-label="Addresses table"
         >
-          <thead className="bg-gray-50">
+          <thead className="bg-gray-50 dark:bg-gray-900">
             <tr>
               <th
                 scope="col"
-                className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 dark:text-white"
               >
                 Address Name
               </th>
@@ -237,25 +237,28 @@ const AddressList: FC = () => {
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200 bg-white">
+          <tbody className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
             {filteredAddresses.map((address) => (
-              <tr key={address.id} className="hover:bg-gray-50">
-                <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+              <tr
+                key={address.id}
+                className="hover:bg-gray-50 dark:hover:bg-gray-700"
+              >
+                <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 dark:text-white">
                   {address.addressName}
                 </td>
-                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
                   {address.username}
                 </td>
-                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
                   {address.logradouro}
                 </td>
-                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
                   {address.localidade}
                 </td>
-                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
                   {address.uf}
                 </td>
-                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
                   {address.cep}
                 </td>
                 <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
@@ -264,7 +267,7 @@ const AddressList: FC = () => {
                     onKeyPress={(e) =>
                       handleKeyPress(e, () => handleEdit(address))
                     }
-                    className="mr-2 inline-flex items-center rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                    className="mr-2 inline-flex items-center rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 dark:bg-gray-800 dark:text-white dark:ring-gray-700 dark:hover:bg-gray-700"
                     aria-label={`Edit address ${address.addressName}`}
                     tabIndex={0}
                     role="button"
@@ -277,7 +280,7 @@ const AddressList: FC = () => {
                     onKeyPress={(e) =>
                       handleKeyPress(e, () => handleDelete(address.id))
                     }
-                    className="inline-flex items-center rounded-md bg-red-50 px-2.5 py-1.5 text-sm font-semibold text-red-700 shadow-sm ring-1 ring-inset ring-red-600/10 hover:bg-red-100"
+                    className="inline-flex items-center rounded-md bg-red-50 px-2.5 py-1.5 text-sm font-semibold text-red-700 shadow-sm ring-1 ring-inset ring-red-600/10 hover:bg-red-100 dark:bg-red-900/10 dark:text-red-400 dark:ring-red-400/20 dark:hover:bg-red-900/20"
                     aria-label={`Delete address ${address.addressName}`}
                     tabIndex={0}
                     role="button"

@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { forwardRef } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -19,7 +19,7 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>
 
-const AddressForm: FC = () => {
+const AddressForm = forwardRef<HTMLFormElement>((_, ref) => {
   const { refreshAddresses } = useAddresses()
   const {
     register,
@@ -57,29 +57,29 @@ const AddressForm: FC = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+    <form ref={ref} onSubmit={handleSubmit(onSubmit)} className="space-y-8">
       <div className="grid gap-8 md:grid-cols-3">
         <div>
           <label
             htmlFor="username"
-            className="mb-2 block text-sm font-medium text-gray-900"
+            className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
           >
             Username
           </label>
           <div className="relative rounded-lg shadow-sm">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-              <FiUser className="size-5 text-gray-400" />
+              <FiUser className="size-5 text-gray-400 dark:text-gray-500" />
             </div>
             <input
               type="text"
               id="username"
               {...register('username')}
-              className="block w-full rounded-lg border-0 py-3 pl-11 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className="block w-full rounded-lg border-0 py-3 pl-11 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-gray-700 dark:placeholder:text-gray-500 dark:focus:ring-indigo-500"
               placeholder="John Doe"
             />
           </div>
           {errors.username && (
-            <p className="mt-2 text-sm text-red-600">
+            <p className="mt-2 text-sm text-red-600 dark:text-red-400">
               {errors.username.message}
             </p>
           )}
@@ -88,24 +88,24 @@ const AddressForm: FC = () => {
         <div>
           <label
             htmlFor="addressName"
-            className="mb-2 block text-sm font-medium text-gray-900"
+            className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
           >
             Address Name
           </label>
           <div className="relative rounded-lg shadow-sm">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-              <FiMapPin className="size-5 text-gray-400" />
+              <FiMapPin className="size-5 text-gray-400 dark:text-gray-500" />
             </div>
             <input
               type="text"
               id="addressName"
               {...register('addressName')}
-              className="block w-full rounded-lg border-0 py-3 pl-11 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className="block w-full rounded-lg border-0 py-3 pl-11 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-gray-700 dark:placeholder:text-gray-500 dark:focus:ring-indigo-500"
               placeholder="Home"
             />
           </div>
           {errors.addressName && (
-            <p className="mt-2 text-sm text-red-600">
+            <p className="mt-2 text-sm text-red-600 dark:text-red-400">
               {errors.addressName.message}
             </p>
           )}
@@ -114,13 +114,13 @@ const AddressForm: FC = () => {
         <div>
           <label
             htmlFor="cep"
-            className="mb-2 block text-sm font-medium text-gray-900"
+            className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
           >
             CEP
           </label>
           <div className="relative rounded-lg shadow-sm">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-              <FiHash className="size-5 text-gray-400" />
+              <FiHash className="size-5 text-gray-400 dark:text-gray-500" />
             </div>
             <Controller
               name="cep"
@@ -133,13 +133,15 @@ const AddressForm: FC = () => {
                   unmask={false}
                   onAccept={(value) => onChange(value)}
                   placeholder="12345-678"
-                  className="block w-full rounded-lg border-0 py-3 pl-11 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-lg border-0 py-3 pl-11 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-gray-700 dark:placeholder:text-gray-500 dark:focus:ring-indigo-500"
                 />
               )}
             />
           </div>
           {errors.cep && (
-            <p className="mt-2 text-sm text-red-600">{errors.cep.message}</p>
+            <p className="mt-2 text-sm text-red-600 dark:text-red-400">
+              {errors.cep.message}
+            </p>
           )}
         </div>
       </div>
@@ -148,7 +150,7 @@ const AddressForm: FC = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-8 py-3.5 text-base font-semibold text-white shadow-sm transition duration-200 ease-in-out hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50"
+          className="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-8 py-3.5 text-base font-semibold text-white shadow-sm transition duration-200 ease-in-out hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 dark:bg-indigo-500 dark:hover:bg-indigo-400"
         >
           <FiSearch className="mr-2 size-5" />
           {isSubmitting ? 'Searching...' : 'Search Address'}
@@ -156,6 +158,8 @@ const AddressForm: FC = () => {
       </div>
     </form>
   )
-}
+})
+
+AddressForm.displayName = 'AddressForm'
 
 export default AddressForm

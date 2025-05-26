@@ -44,8 +44,8 @@ const EditAddressModal: FC<EditAddressModalProps> = ({
 
       <div className="fixed inset-0 overflow-y-auto">
         <div className="flex min-h-full items-center justify-center p-4">
-          <Dialog.Panel className="mx-auto w-full max-w-md rounded-xl bg-white p-6 shadow-xl">
-            <Dialog.Title className="flex items-center gap-2 text-xl font-semibold leading-6 text-gray-900">
+          <Dialog.Panel className="mx-auto w-full max-w-lg rounded-xl bg-white p-6 shadow-xl dark:bg-gray-800">
+            <Dialog.Title className="flex items-center gap-2 text-xl font-semibold leading-6 text-gray-900 dark:text-white">
               <FiMapPin className="size-5" />
               Edit Address
             </Dialog.Title>
@@ -54,7 +54,7 @@ const EditAddressModal: FC<EditAddressModalProps> = ({
               <div>
                 <label
                   htmlFor="editUsername"
-                  className="mb-2 block text-sm font-medium text-gray-900"
+                  className="block text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Username
                 </label>
@@ -69,7 +69,7 @@ const EditAddressModal: FC<EditAddressModalProps> = ({
                     onChange={(e) =>
                       setFormData({ ...formData, username: e.target.value })
                     }
-                    className="block w-full rounded-lg border-0 py-3 pl-11 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="mt-2 block w-full rounded-lg border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-gray-700 dark:placeholder:text-gray-500 dark:focus:ring-indigo-500"
                     placeholder="John Doe"
                     minLength={3}
                     required
@@ -80,7 +80,7 @@ const EditAddressModal: FC<EditAddressModalProps> = ({
               <div>
                 <label
                   htmlFor="editAddressName"
-                  className="mb-2 block text-sm font-medium text-gray-900"
+                  className="block text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Address Name
                 </label>
@@ -95,7 +95,7 @@ const EditAddressModal: FC<EditAddressModalProps> = ({
                     onChange={(e) =>
                       setFormData({ ...formData, addressName: e.target.value })
                     }
-                    className="block w-full rounded-lg border-0 py-3 pl-11 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="mt-2 block w-full rounded-lg border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:text-white dark:ring-gray-700 dark:placeholder:text-gray-500 dark:focus:ring-indigo-500"
                     placeholder="Home"
                     minLength={3}
                     required
@@ -103,17 +103,17 @@ const EditAddressModal: FC<EditAddressModalProps> = ({
                 </div>
               </div>
 
-              <div className="mt-6 flex justify-end gap-3">
+              <div className="mt-6 flex items-center justify-end gap-3">
                 <button
                   type="button"
                   onClick={onClose}
-                  className="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="rounded-lg bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 dark:bg-gray-800 dark:text-white dark:ring-gray-700 dark:hover:bg-gray-700"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="rounded-lg bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400"
                 >
                   Save Changes
                 </button>
