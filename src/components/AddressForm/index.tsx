@@ -1,9 +1,10 @@
 import { FC } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import toast from 'react-hot-toast'
 import { v4 as uuidv4 } from 'uuid'
+import { IMaskInput } from 'react-imask'
 import { fetchAddressByCEP } from '../../services/viacep'
 import { saveAddress } from '../../services/storage'
 import type { AddressData } from '../../types/address'
@@ -12,9 +13,7 @@ import { useAddresses } from '../../context/AddressContext'
 const formSchema = z.object({
   username: z.string().min(3, 'Username must be at least 3 characters'),
   addressName: z.string().min(3, 'Address name must be at least 3 characters'),
-  cep: z
-    .string()
-    .regex(/^\d{5}-?\d{3}$/, 'CEP must be in format: 12345-678 or 12345678')
+  cep: z.string().regex(/^\d{5}-\d{3}$/, 'CEP must be in format: 12345-678')
 })
 
 type FormData = z.infer<typeof formSchema>
@@ -24,6 +23,7 @@ const AddressForm: FC = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
     reset
   } = useForm<FormData>({
@@ -102,12 +102,20 @@ const AddressForm: FC = () => {
         >
           CEP
         </label>
-        <input
-          type="text"
-          id="cep"
-          {...register('cep')}
-          placeholder="12345-678"
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+        <Controller
+          name="cep"
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <IMaskInput
+              id="cep"
+              mask="00000-000"
+              value={value}
+              unmask={false}
+              onAccept={(value) => onChange(value)}
+              placeholder="12345-678"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            />
+          )}
         />
         {errors.cep && (
           <p className="mt-1 text-sm text-red-600">{errors.cep.message}</p>

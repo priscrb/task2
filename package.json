@@ -8,7 +8,6 @@
     "name": "Priscilla Ribeiro",
     "email": "priscillaribeirosa@gmail.com"
   },
-
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -19,12 +18,14 @@
     "typecheck": "tsc --project tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.4",
     "@hookform/resolvers": "^5.0.1",
     "@types/uuid": "^10.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.56.4",
     "react-hot-toast": "^2.5.2",
+    "react-imask": "^7.6.1",
     "uuid": "^11.1.0",
     "zod": "^3.25.28"
   },
