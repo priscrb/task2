@@ -5,6 +5,7 @@ import { z } from 'zod'
 import toast from 'react-hot-toast'
 import { v4 as uuidv4 } from 'uuid'
 import { IMaskInput } from 'react-imask'
+import { FiSearch, FiUser, FiMapPin, FiHash } from 'react-icons/fi'
 import { fetchAddressByCEP } from '../../services/viacep'
 import { saveAddress } from '../../services/storage'
 import type { AddressData } from '../../types/address'
@@ -56,79 +57,103 @@ const AddressForm: FC = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <div>
-        <label
-          htmlFor="username"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Username
-        </label>
-        <input
-          type="text"
-          id="username"
-          {...register('username')}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-        />
-        {errors.username && (
-          <p className="mt-1 text-sm text-red-600">{errors.username.message}</p>
-        )}
-      </div>
-
-      <div>
-        <label
-          htmlFor="addressName"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Address Name
-        </label>
-        <input
-          type="text"
-          id="addressName"
-          {...register('addressName')}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-        />
-        {errors.addressName && (
-          <p className="mt-1 text-sm text-red-600">
-            {errors.addressName.message}
-          </p>
-        )}
-      </div>
-
-      <div>
-        <label
-          htmlFor="cep"
-          className="block text-sm font-medium text-gray-700"
-        >
-          CEP
-        </label>
-        <Controller
-          name="cep"
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <IMaskInput
-              id="cep"
-              mask="00000-000"
-              value={value}
-              unmask={false}
-              onAccept={(value) => onChange(value)}
-              placeholder="12345-678"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+      <div className="grid gap-8 md:grid-cols-3">
+        <div>
+          <label
+            htmlFor="username"
+            className="mb-2 block text-sm font-medium text-gray-900"
+          >
+            Username
+          </label>
+          <div className="relative rounded-lg shadow-sm">
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+              <FiUser className="size-5 text-gray-400" />
+            </div>
+            <input
+              type="text"
+              id="username"
+              {...register('username')}
+              className="block w-full rounded-lg border-0 py-3 pl-11 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              placeholder="John Doe"
             />
+          </div>
+          {errors.username && (
+            <p className="mt-2 text-sm text-red-600">
+              {errors.username.message}
+            </p>
           )}
-        />
-        {errors.cep && (
-          <p className="mt-1 text-sm text-red-600">{errors.cep.message}</p>
-        )}
+        </div>
+
+        <div>
+          <label
+            htmlFor="addressName"
+            className="mb-2 block text-sm font-medium text-gray-900"
+          >
+            Address Name
+          </label>
+          <div className="relative rounded-lg shadow-sm">
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+              <FiMapPin className="size-5 text-gray-400" />
+            </div>
+            <input
+              type="text"
+              id="addressName"
+              {...register('addressName')}
+              className="block w-full rounded-lg border-0 py-3 pl-11 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              placeholder="Home"
+            />
+          </div>
+          {errors.addressName && (
+            <p className="mt-2 text-sm text-red-600">
+              {errors.addressName.message}
+            </p>
+          )}
+        </div>
+
+        <div>
+          <label
+            htmlFor="cep"
+            className="mb-2 block text-sm font-medium text-gray-900"
+          >
+            CEP
+          </label>
+          <div className="relative rounded-lg shadow-sm">
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+              <FiHash className="size-5 text-gray-400" />
+            </div>
+            <Controller
+              name="cep"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <IMaskInput
+                  id="cep"
+                  mask="00000-000"
+                  value={value}
+                  unmask={false}
+                  onAccept={(value) => onChange(value)}
+                  placeholder="12345-678"
+                  className="block w-full rounded-lg border-0 py-3 pl-11 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              )}
+            />
+          </div>
+          {errors.cep && (
+            <p className="mt-2 text-sm text-red-600">{errors.cep.message}</p>
+          )}
+        </div>
       </div>
 
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50"
-      >
-        {isSubmitting ? 'Searching...' : 'Search Address'}
-      </button>
+      <div className="flex justify-end">
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-8 py-3.5 text-base font-semibold text-white shadow-sm transition duration-200 ease-in-out hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50"
+        >
+          <FiSearch className="mr-2 size-5" />
+          {isSubmitting ? 'Searching...' : 'Search Address'}
+        </button>
+      </div>
     </form>
   )
 }
